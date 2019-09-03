@@ -3,6 +3,31 @@
 
 <head>
   <meta charset="UTF-8">
+  <script>
+       function idleLogout() {
+    var t;
+    window.onload = resetTimer;
+    window.onmousemove = resetTimer;
+    window.onmousedown = resetTimer;  // catches touchscreen presses as well      
+    window.ontouchstart = resetTimer; // catches touchscreen swipes as well 
+    window.onclick = resetTimer;      // catches touchpad clicks as well
+    window.onkeypress = resetTimer;   
+    window.addEventListener('scroll', resetTimer, true); // improved; see comments
+
+    function yourFunction() {
+        fetch('http://189ce94a.ngrok.io/stopInstance', {method: 'POST',
+         body: JSON.stringify({key: window.location.hostname.split('.')[0]}), headers: {
+            'Content-Type': 'application/json',
+        },})
+    }
+
+    function resetTimer() {
+        clearTimeout(t);
+        t = setTimeout(yourFunction, 30*60000);  // time is in milliseconds
+    }
+}
+idleLogout();
+   </script>
   <script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
 </head>
 
