@@ -13,9 +13,17 @@
     window.onclick = resetTimer;      // catches touchpad clicks as well
     window.onkeypress = resetTimer;   
     window.addEventListener('scroll', resetTimer, true); // improved; see comments
+    var h = setInterval(() => {
+        fetch('http://http://35.194.3.187:5000/heartBeat', {method: 'POST',
+         body: JSON.stringify({key: window.location.hostname.split('.')[0]}), headers: {
+            'Content-Type': 'application/json',
+        },})
+    }, 5 * 60 * 1000); 
 
     function yourFunction() {
-        fetch('http://189ce94a.ngrok.io/stopInstance', {method: 'POST',
+        clearTimeout(t);
+        clearInterval(h)
+        fetch('http://http://35.194.3.187:5000/stopInstance', {method: 'POST',
          body: JSON.stringify({key: window.location.hostname.split('.')[0]}), headers: {
             'Content-Type': 'application/json',
         },})
