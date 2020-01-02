@@ -11,6 +11,9 @@
         return true;
     }
     }
+    if(!inIframe()) {
+       window.close();
+       }
     console.log('iframe',inIframe())
    </script>
   <script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
